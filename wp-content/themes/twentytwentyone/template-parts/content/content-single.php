@@ -31,6 +31,12 @@
 			)
 		);
 		?>
+
+		<?php $firstName = get_post_meta(get_the_ID(), 'first_name', true); ?>
+		<?php if ($firstName): ?>
+		  <div class=""><?php echo $firstName ?></div>
+		<?php endif; ?>
+
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer default-max-width">
