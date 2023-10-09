@@ -1047,3 +1047,23 @@ function create_taxonomy() {
 
 // Hook into the 'init' action
 add_action( 'init', 'create_taxonomy', 0 );
+
+
+
+//Action Hook pre_get_posts
+function modify_archive_query( $query ) {
+    if( $query->is_archive() && $query->is_main_query() ) : 
+        $query->set('orderby', 'rand');
+        $query->set('posts_per_page', '1');
+    endif;
+    
+}
+add_action( 'pre_get_posts', 'modify_archive_query' );
+
+
+//action hook wp_head
+//add tag author to header
+function author_tag(){
+    echo "<link rel=\"author\" href=\"https://google.com\" />\n";
+}
+add_action( 'wp_head', 'author_tag' );
