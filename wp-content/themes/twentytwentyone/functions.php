@@ -1067,3 +1067,29 @@ function author_tag(){
     echo "<link rel=\"author\" href=\"https://google.com\" />\n";
 }
 add_action( 'wp_head', 'author_tag' );
+
+
+//sample of add_filter
+function change_copyright( $output ) {
+    $output = 'Design by WordPress';
+    return $output;
+}
+add_filter( 'modify_copyright', 'change_copyright' );
+
+
+//apply filter for the_content
+function modify_content_filter( $content ) {
+    $find = 'hello';
+    $replacement = "<strong>hello</strong>";
+    $content = str_replace( $find, $replacement, $content );
+    return $content;
+}
+add_filter( 'content_filter', 'modify_content_filter' );
+
+
+//change name file before upload file to server
+add_filter('wp_handle_upload_prefilter', 'custom_upload_filter' );
+function custom_upload_filter( $file ){
+    $file['name'] = 'wordpress-is-awesome-' . $file['name'];
+    return $file;
+}

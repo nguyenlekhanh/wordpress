@@ -68,6 +68,10 @@
 					'<a href="' . esc_url( __( 'https://wordpress.org/', 'twentytwentyone' ) ) . '">WordPress</a>'
 				);
 				?>
+				<?php
+			        $copyright = 'Design by Me';
+			        echo apply_filters( 'modify_copyright', $copyright );
+			    ?>
 			</div><!-- .powered-by -->
 
 		</div><!-- .site-info -->
@@ -75,11 +79,11 @@
 
 </div><!-- #page -->
 
-<?php wp_footer(); ?>
+<!-- <?php wp_footer(); ?>
 <?php
     echo '<pre>';
     print_r ($wp_query);
     echo '</pre>';
-?>
+?> -->
 </body>
 </html>
