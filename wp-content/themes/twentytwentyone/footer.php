@@ -76,6 +76,10 @@
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
-
+<?php
+    echo '<pre>';
+    print_r ($wp_query);
+    echo '</pre>';
+?>
 </body>
 </html>

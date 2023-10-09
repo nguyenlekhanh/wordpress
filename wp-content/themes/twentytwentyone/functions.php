@@ -906,7 +906,6 @@ class Random_Post extends WP_Widget {
 
     function form( $instance ) {
 
-
         $default = array(
             'title' => 'Random post widget',
             'post_number' => 10
@@ -924,6 +923,7 @@ class Random_Post extends WP_Widget {
 
 
     function update( $new_instance, $old_instance ) {
+    	//update to table wp_options
         $instance = $old_instance;
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['post_number'] = strip_tags($new_instance['post_number']);
@@ -968,3 +968,82 @@ add_action( 'widgets_init', 'create_randompost_widget' );
 function create_randompost_widget() {
     register_widget('Random_Post');
 }
+
+
+
+
+//init function for shortcode
+function create_shortcode() {
+	echo "Hello World!";
+}
+//create shortcode with name [test_shortcode] and add to wordpress with function create_shortcode
+add_shortcode( 'test_shortcode', 'create_shortcode' );
+
+
+function create_shortcode_randompost() {
+	$random_query = new WP_Query(array(
+		'posts_per_page' => 10,
+		'orderby' => 'rand'
+	));
+
+
+	ob_start();
+	if ( $random_query->have_posts() ) :
+		"<ol>";
+		while ( $random_query->have_posts() ) :
+			$random_query->the_post();?>
+
+
+				<li><a href="<?php the_permalink(); ?>"><h5><?php the_title(); ?></h5></a></li>
+
+
+		<?php endwhile;
+		"</ol>";
+	endif;
+	$list_post = ob_get_contents();
+
+
+	ob_end_clean();
+
+
+	return $list_post;
+}
+add_shortcode('random_post', 'create_shortcode_randompost');
+
+
+
+
+
+function create_taxonomy() {
+	/* Biến $label chứa các tham số thiết lập tên hiển thị của Taxonomy
+	 */
+	$labels = array(
+		'name' => 'Type of products',
+		'singular' => 'Type of product',
+		'menu_name' => 'Type of product'
+	);
+
+
+	/* Biến $args khai báo các tham số trong custom taxonomy cần tạo
+	 */
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => true,
+	);
+
+
+	/* register_taxonomy for init taxonomy
+	 */
+	register_taxonomy('product-type', 'post', $args);
+
+
+}
+
+
+// Hook into the 'init' action
+add_action( 'init', 'create_taxonomy', 0 );
