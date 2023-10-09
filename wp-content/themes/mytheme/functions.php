@@ -46,4 +46,23 @@ function mytheme_register_script() {
 
 //when wordpress run this hook also run my function
 add_action('wp_enqueue_scripts', 'mytheme_register_script');
+
+
+function mytheme_widget_areas() {
+
+	register_sidebar(
+		array(
+			'name' => 'Sidebar Area',
+			'id' => 'sidebar-1',
+			'description' => 'Sidebar Widget Area',
+			'before_title' => '',
+			'after_title' => '',
+			'before_widget' => '<ul class="social-list list-inline py-3 mx-auto">',
+			'after_widget' => '</ul>'
+		)
+	);
+}
+
+
+add_action('widgets_init', 'mytheme_widget_areas');
 ?>
