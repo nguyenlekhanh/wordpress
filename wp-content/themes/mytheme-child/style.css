@@ -1,0 +1,11 @@
+/**
+ Theme Name: my theme Child
+ Description: Theme for simple shop tutorial
+ Author: KN
+ Template: mytheme
+ */
+  
+.h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: normal;
+}
