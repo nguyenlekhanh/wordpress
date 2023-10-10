@@ -86,3 +86,23 @@ function my_setting_markup_1() {
     <input type="text" id="my_setting_field_1" name="my_setting_field_1" value="<?php echo get_option( 'my_setting_field_1' ); ?>">
     <?php
 }
+
+
+
+add_action('admin_menu', 'wpdocs_register_my_custom_submenu_page');
+
+function wpdocs_register_my_custom_submenu_page() {
+    add_submenu_page(
+        'sample-page',
+        'My Custom Submenu Page',
+        'My Custom Submenu Page',
+        'manage_options',
+        'my-custom-submenu-page',
+        'wpdocs_my_custom_submenu_page_callback' );
+}
+
+function wpdocs_my_custom_submenu_page_callback() {
+    echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
+        echo '<h2>My Custom Submenu Page</h2>';
+    echo '</div>';
+}
